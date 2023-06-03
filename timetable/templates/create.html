@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Create</title>
+  </head>
+  <body>
+    <h1>Добавление семян</h1>
+    <form action="{% url 'timetable:save' %}" method="POST">
+      {% csrf_token %}
+      <fieldset>
+
+        <label>Наименование:</label>
+        <input type="text" placeholder="Фрезия" name="name">
+        <br>
+
+        <label>Стратификация:</label>
+        <input type="checkbox"  name="stratification" ><br>
+
+        <label>Тип:</label>
+        <select name="type">
+          <option value="mushroom">Грибы</option>
+          <option value="herb">Зелень</option>
+          <option value="vegetable">Овощи</option>
+          <option value="fruit">Фрукты</option>
+          <option value="flower">Цветы</option>
+        </select>
+
+        <label>Годен до:</label>
+        <input type="date" name="expired_on"><br>
+
+
+
+        <label>Посадка:</label>
+        <input type="radio" id="gr" name="sow_way" value="into_the_ground">
+        <label for="gr">Грунт</label>
+        <input type="radio" id="thr" name="sow_way" value="through_seedlings">
+        <label for="thr">Рассада</label>
+        <input type="radio" id="both" name="sow_way" value="both">
+        <label for="thr">Грунт или рассада</label><br>
+
+        <input type="month" name="sow_start">
+        <label>-</label>
+        <input type="month" name="sow_end"><br>
+
+        <label>Имя файла:</label>
+        <input type="text" placeholder="Фрезия.jpg" name="image">
+
+        <input type="submit" value="Сохранить">
+      </fieldset>
+
+
+    </form>
+    <style>
+        html, body {
+          height: 100%;
+        }
+        body {
+        background: #FFEEEE;  /* fallback for old browsers */
+        background: -webkit-linear-gradient(to top, #DDEFBB, #FFEEEE);  /* Chrome 10-25, Safari 5.1-6 */
+        background: linear-gradient(to bottom, #DDEFBB, #FFEEEE); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+        background-repeat: no-repeat;
+        }
+
+        form {
+          max-width: 768px;
+          margin: 0 auto;
+          padding: 1rem;
+          font-size: 1.25rem;
+          line-height: 1.5;
+          font-family: sans-serif;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+
+        h1 {
+          text-align: center;
+        }
+
+        label {
+          margin-bottom: 1rem;
+          display: inline-block;
+          }
+
+
+         input, select {
+         border-radius: 5px;
+         font-size: inherit;
+         padding: 6px;
+         }
+        input[type="submit"] {
+        display: block;
+        margin: 0 auto;
+        }
+
+        fieldset {
+          border: 1px solid;
+        }
+
+    </style>
+  </body>
+</html>

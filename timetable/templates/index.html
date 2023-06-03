@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Table</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+  </head>
+
+{% if saved_seeds %}
+<body>
+<div class="container">
+  <form action="" method="GET">
+      {% csrf_token %}
+  <fieldset>
+
+    <input type="checkbox" name="type" id="" value="">
+    <label for="scales">Scales</label>
+  </fieldset>
+<table class="table" style="margin: 0 auto;" >
+  <thead>
+    <tr>
+      <th rowspan="2">Семена</th>
+      <th rowspan="2">Способ посадки</th>
+      <th colspan="12">Посев, высадка</th>
+    <tr>
+      {% for month in year%}
+        <th>{{ month }}</th>
+      {% endfor %}
+    </tr>
+    </tr>
+  </thead>
+{% load timetable_extras %}
+  <tbody>
+    {% for seed in saved_seeds %}
+    <tr>
+      <td  rowspan="2">{{ seed.name }}</td>
+      <td  rowspan="2">{{ seed.sow_way }}</td>
+      {% for i in count_h %}
+        {% for month in count_l %}
+          {% if seed|color:month %}
+            {% if i == 0 %}
+              <td class="bg-green"></td>
+            {% else %}
+              <td class="bg-pink"></td>
+            {% endif %}
+          {% else %}
+          <td></td>
+          {% endif %}
+       {% endfor %}
+
+    </tr>
+      {% endfor %}
+
+    {% endfor %}
+
+  </tbody>
+</table>
+</div>
+{% else %}
+    <p>No games.</p>
+{% endif %}
+
+<style>
+  body {
+    padding: 120px;
+    background: #FFEEEE;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to top, #DDEFBB, #FFEEEE);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to bottom, #DDEFBB, #FFEEEE); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    }
+  .table{
+  background-color: transparent;
+  font-weight: bold;
+  }
+  .table td, .table th {
+    border-width: 1px;
+    border-color: black;
+  }
+  .table tbody tr:last-child td, .table tbody tr:last-child th {
+    border-bottom-width: 1px;
+}
+  .container .table th {
+    text-align: center;
+    border-width: 1px;
+    vertical-align : middle;
+  }
+  .bg-green {
+    background: #c5f57d;
+  }
+  .bg-pink {
+    background:#f58e91;
+  }
+
+</style>
+</body>
